@@ -1,11 +1,12 @@
 from rest_framework import serializers
 from .models import Item
+from decimal import Decimal
 
 class ItemSerializer(serializers.ModelSerializer):
     price = serializers.DecimalField(
         max_digits=10,
         decimal_places=2,
-        min_value=0.01,
+        min_value=Decimal('0.01'),
         error_messages={
             'invalid': 'Стоимость должна быть корректным числом.',
             'min_value': 'Стоимость должна быть больше 0.',
