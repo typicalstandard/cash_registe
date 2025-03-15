@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cash_register',
+    'rest_framework',
+    'cash_machine',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,31 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'INFO',  # Меняем уровень на INFO
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'WARNING',  # Логи Django будут выводить только предупреждения и ошибки
+        },
+        'cash_machine': {
+            'handlers': ['console'],
+            'level': 'INFO',  # Логи приложения будут выводить информационные сообщения и ошибки
+            'propagate': False,
+        },
+    },
+}
